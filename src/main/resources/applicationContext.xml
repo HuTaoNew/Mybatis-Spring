@@ -17,4 +17,23 @@
         <property name="username" value="root" />
         <property name="password" value="123hutao" />
     </bean>
+
+    <!--SqlSessionFactoryBean配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--指定mybatis配置文件的路径-->
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <!--配置数据库，此为必选项-->
+        <property name="dataSource" ref="dataSource" />
+        <!--设置SqlSessionFactoryBean扫描mapper文件的位置 -->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:tk/mybatis/**/mapper/*.xml</value>
+            </array>
+        </property>
+        <property name="typeAliasesPackage" value="tk.mybatis.web.model" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="tk.mybatis.**.mapper" />
+    </bean>
 </beans>
